@@ -17,9 +17,10 @@
             *ngFor="let odd of oddNumbers">
             {{ odd }}
           </li>
-        </div>
+         </div>
 
-        <div *ngIf="!onlyOdd">
+        
+        <!-- <div *ngIf="!onlyOdd">
           <li 
             class="list-group-item"
             [ngClass] = "{odd: even % 2 !== 0}"
@@ -27,11 +28,43 @@
             *ngFor="let even of evenNumbers">
             {{ even }}
           </li>
-        </div>
+         </div>
+
+        This is the set of code after reconfiguration by Angular, it is exact the same as the above code 
+        The div is enclosed in a ng-template with [ngIf] as a property
+        <ng-template [ngIf]="!onlyOdd">
+          <div>
+            <li 
+              class="list-group-item"
+              [ngClass] = "{odd: even % 2 !== 0}"
+              [ngStyle] = "{backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'}"        
+              *ngFor="let even of evenNumbers">
+              {{ even }}
+            </li>
+          </div>
+          </ng-template> -->
+
+          <!-- The selector's name must be the same as the one used in the structural directive -->
+          <div *appUnless="onlyOdd">
+            <li 
+              class="list-group-item"
+              [ngClass] = "{odd: even % 2 !== 0}"
+              [ngStyle] = "{backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'}"        
+              *ngFor="let even of evenNumbers">
+              {{ even }}
+            </li>
+          </div>
+
+
         </ul>
 
+        <!-- The directives modifies the element 
+        The directive's custom properties can take in values -->
         <p appBasicHighlight>Style me with basic directive</p>
-        <p appBetterHighlight>Style me with basic directive</p>
+        <p appBetterHighlight 
+        [defaultColor]="'yellow'" 
+        [highlightColor]="'red'">
+        Style me with basic directive</p>
         
     </div>
   </div>
